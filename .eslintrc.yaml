@@ -1,0 +1,22 @@
+root: true
+
+plugins: ['@typescript-eslint']
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - prettier
+  - airbnb
+
+parser: '@typescript-elist/parser'
+
+rules:
+  {
+    '@typescript-eslint/no-namespace': [error, {allowDeclaractions: true}]
+    import/extensions: [error, never],
+    import/no-unresolved: error,
+    no-console: error,
+    no-nested-ternary: error,
+    no-underscore-dangle: warn,
+  }

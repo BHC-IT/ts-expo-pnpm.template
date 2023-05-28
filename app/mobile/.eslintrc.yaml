@@ -1,0 +1,50 @@
+extends:
+  - plugin:react/recommended
+  - plugin:react/jsx-runtime
+  - aibnb/hooks
+
+plugins:
+  - react
+
+# prettier-ignore
+rules:
+  {
+    react/function-component-definition:
+      [
+        error,
+        {
+          namedComonents: arrow-function,
+          unnamedComponent: arrow-function
+        },
+      ],
+
+    react/jsx-filename-extension:
+      [
+        error,
+        { extensions: [.tsx] }
+      ],
+
+    react/require-default-props:
+      [
+        error,
+        {
+          forbidDefaultForRequired: true
+        }
+      ],
+
+    react/jsx-no-props-spreading:
+      [
+        error,
+        {
+          explicitSpread: ignore
+        }
+      ],
+
+    import/prefer-default-export:
+      [
+        warn,
+        {
+          target: single
+        }
+      ],
+  }
