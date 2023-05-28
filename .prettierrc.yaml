@@ -1,0 +1,26 @@
+singleQuote: true
+tabWidth: 2
+useTabs: false
+semi: false
+arrowParens: avoid
+jsxSingleQuote: true
+
+# Prettier has—at least for me—a weird tendency to not work on files other than .ts/.js
+# when installed as a package's devDependency.
+# These settings enforce using the right parser for the right filetypes.
+overrides:
+  - files:
+      - '*.json'
+      - '*.jsonc'
+    options:
+      parser: 'json'
+
+  - files:
+      - '*.ts'
+      - '*.tsx'
+    options:
+      parser: 'babel-ts'
+
+  - files: '*.yaml'
+    options:
+      parser: 'yaml'
