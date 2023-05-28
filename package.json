@@ -1,13 +1,15 @@
 {
   "private": true,
   "name": "@scope/monorepo",
+  "scripts": {
+    "lint": "turbo lint",
+    "start": "turbo start",
+    "build": "turbo build",
+    "dev": "turbo dev"
+  },
   "pnpm": {
     "peerDependencyRules": {
-      "ignoreMissing": [
-        "@babel/*",
-        "expo-modules-*",
-        "typescript"
-      ]
+      "ignoreMissing": ["@babel/*", "expo-modules-*", "typescript"]
     }
   },
   "devDependencies": {
