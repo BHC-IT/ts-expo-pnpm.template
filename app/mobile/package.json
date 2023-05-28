@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "@scope/app-mobile",
+  "version": "1.0.0",
+  "main": "./src/App.tsx",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "expo start --android",
+    "dev": "expo run:android"
+  },
+  "dependencies": {
+    "expo": "~48.0.15",
+    "expo-status-bar": "~1.4.4",
+    "react": "18.2.0",
+    "react-native": "0.71.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "~18.0.27"
+  }
+}

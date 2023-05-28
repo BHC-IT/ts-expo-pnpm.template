@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "@scope/api-bff",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "build": "tsc",
+    "start": "nodemon ./src/index.ts",
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "nodemon": "^2.0.22",
+    "pino-pretty": "^10.0.0"
+  },
+  "dependencies": {
+    "@fastify/jwt": "^7.0.0",
+    "@fastify/swagger": "^8.5.1",
+    "@fastify/swagger-ui": "^1.8.1",
+    "fastify": "^4.17.0",
+    "fastify-auth0-verify": "^1.1.2",
+    "fastify-metrics": "^10.3.0",
+    "fastify-type-provider-zod": "^1.1.9",
+    "zod": "^3.21.4"
+  }
+}
