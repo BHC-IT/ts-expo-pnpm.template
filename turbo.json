@@ -1,0 +1,95 @@
+/**
+ * This is your root Turbo configuration.
+ * It will define the basics, and then your packages can extend it.
+ * You can find a `turbo.json` that extends this one at `./app/mobile/turbo.json`
+ *
+ * https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces#how-it-works
+ */
+{
+  "$schema": "https://turbo.build/schema.json",
+
+  /**
+   * Changes to files listed here will invalidate the pipeline caches and force running the tasks instead of using the cached output.
+   * Patterns must be relative to this file (turbo.json)
+   *
+   * https://turbo.build/repo/docs/reference/configuration#globaldependencies
+   */
+  "globalDependencies": ["**/.env", "**/tsconfig.json", "**/.eslintrc.yaml"],
+
+  "pipeline": {
+    /**
+     * Lint tasks don't have any dependency on your project's other tasks.
+     * They can run in parallel on all your workspaces just fine, assuming
+     * you set up your linting configs properly.
+     *
+     * This repo contains some configurations already, you can check them out:
+     * You can find them at
+     * ./
+     * ├╴.eslintrc.yaml
+     * ├╴app/
+     * │  ╰╴.eslintrc.yaml
+     * ╰╴common/
+     *    ╰╴.eslintrc.yaml
+     */
+    "lint": {},
+
+    /**
+     * This is where the magic happens.
+     * Your tasks are set here.
+     *
+     * https://turbo.build/repo/docs/reference/configuration#pipeline
+     */
+    "build": {
+      "dependsOn": [
+        /**
+         * Do not build until you have fixed your coding style mistakes.
+         * Check yourself before you Shrek yourself.
+         */
+        "lint",
+
+        /**
+         * `^` here means that this task depends on all the packages' dependencies' build.
+         * It will ensure that all node modules that require building do that before your packages itself do.
+         */
+        "^build"
+      ]
+    },
+
+    "test": {
+      "dependsOn": ["build"]
+    },
+
+    /**
+     * Start your various dev builds.
+     *
+     * 💡 For now, this template is only set up for Android native apps.
+     *    I don't have any iOS device so I can't test it for them.
+     *    It will likely receive an update for web the day I start working on a web project.
+     *    You are welcome to make pull requests!
+     */
+    "dev": {
+      /**
+       * As this is an operation that lasts over time, and modification or project sources happens continuously
+       * during this phase, it shouldn't be cached.
+       */
+      "cache": false,
+      /**
+       * Inform Turbo that this is a task that keeps running until you, the dev, chose to shut it down.
+       * This prevents you from making oher tasks depend on it, as this one's lifecycle is defined by your interactions with the
+       */
+      "persistent": true
+    },
+
+    /**
+     * Run your Expo app and packages skipping the build phase.
+     *
+     * ⚠️  Uses nodemon on .ts files where possible, and runs `expo start`
+     *    This means that it provides no insurance that your app(s) will run properly once built.
+     *    Use at your own risk.
+     */
+    "start": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

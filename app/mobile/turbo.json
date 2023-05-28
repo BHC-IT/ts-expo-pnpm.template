@@ -1,0 +1,66 @@
+// TODO: Add config for iOS and separate dev:android/dev:ios tragets
+
+/**
+ * This Turbo config extends the root config, and adds some Expo specific settings to it.
+ * By using this method, you remove unnecessary info from the root `turbo.json` and keep
+ * configuration minal, optimal, and closer to their respective targets.
+ * If some things are undocumented here, chances are that you'll find verbose comments
+ * about them in `../../turbo.json` (relative to this file).
+ *
+ * https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces#how-it-works
+ */
+
+{
+  "$schema": "https://turbo.build/schema.json",
+  /**
+   * Inform Turbo that this config is an extension of the root Turbo config.
+   * As of writing, `"//"` is the only value that this array accepts, and basically means "root config".
+   * In the case of this template, `../../turbo.json`
+   *
+   * Note: You might get an editor hint saying "Property 'etends' is not allowed". You can ignore it.
+   *
+   * https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces#how-it-works
+   */
+  "extends": ["//"],
+
+  /**
+   * Invalidate the cache
+   */
+  "globalDependencies": [
+    "node_modules/metro/.cache/**",
+    "../../node_modules/metro/.cache/**",
+    "build/**",
+    "android/**"
+  ],
+
+  "pipeline": {
+    "build": {
+      "outputs": [
+        // Metro-generated cache
+        "node_modules/metro/.cache/**",
+        "../../node_modules/metro/.cache/**",
+
+        // Local `eas build` output
+        "build/**"
+      ],
+
+      /**
+       * This field tells what files to watch for changes triggering a cache invalidation.
+       */
+      "inputs": [
+        // Editing the various native app configs
+        "android/**",
+        "*.config.js",
+        "config/**.ts",
+        "eas.json",
+
+        // App entry point. Should never change, but you never know~
+        "index.js",
+
+        // Your sources
+        "src/**.ts",
+        "src/**.tsx"
+      ]
+    }
+  }
+}
