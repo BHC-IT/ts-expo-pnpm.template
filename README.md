@@ -1,5 +1,7 @@
 # TODOs
 
+- [ ] Check if TS configs extending the root config import the $schema key on
+      other editors
 - [ ] Add other platform support
   - [ ] Add iOS support
   - [ ] Add web support
